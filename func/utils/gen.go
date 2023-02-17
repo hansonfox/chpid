@@ -92,7 +92,6 @@ func writeToFileCo(c chan string, done chan bool, fn string) {
 }
 
 func RandGenNCo(n int, fn string) {
-
 	c := make(chan string, 100)
 	done := make(chan bool)
 	wg := sync.WaitGroup{}
