@@ -11,21 +11,23 @@ import (
 	"path"
 	"strconv"
 	"strings"
+	// "os/exec"
+	// "path/filepath"
 )
 
 var StcodeMap = map[string]string{}
 
 func init() {
-	// 解除下三行注释 处理go build 后读取json文件路径问题
+	// 解除下三行注释 并引入 exec, filepath 处理go build 后读取json文件路径问题
 	// cmd_f, _ := exec.LookPath(os.Args[0])
 	// path, _ := filepath.Abs(cmd_f)
 	// i := strings.LastIndex(path, string(os.PathSeparator))
 	// f, err := ioutil.ReadFile(path[:i] + "/stcode01.json")
 
-	f, err := ioutil.ReadFile("G:/study_pro/go_project/chpid/stcode01.json") //go run main.go运行时使用相对路径 且应保证stcode文件存在于指定位置
+	f, err := ioutil.ReadFile("D:/study/chpid/stcode01.json") //go run main.go运行时使用相对路径 且应保证stcode文件存在于指定位置
 
 	if err != nil {
-		fmt.Printf("区划代码文件读取失败！")
+		fmt.Printf("区划代码文件读取失败！\n Loading stcode file fail! ")
 		os.Exit(1)
 	}
 
