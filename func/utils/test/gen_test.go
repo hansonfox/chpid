@@ -2,6 +2,7 @@ package utils
 
 import (
 	"chpid/func/utils"
+	"regexp"
 	"testing"
 )
 
@@ -32,5 +33,15 @@ func TestGenCheckbit(t *testing.T) {
 			t.Errorf("\nFailed:\"%v\"\ngot:%v\nwant:%v\n", test.input, output, test.want)
 		}
 	}
+}
 
+func TestRandGen(t *testing.T) {
+	regRuler := "(^\\d{18}$)|(^\\d{17}(\\d|X|)$)"
+	reg := regexp.MustCompile(regRuler)
+	for i := 0; i < 20; i++ {
+		output := utils.RandGen()
+		if !reg.MatchString(output) {
+			t.Errorf("RandGen func output not pass regexp check")
+		}
+	}
 }
