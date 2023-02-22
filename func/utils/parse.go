@@ -35,9 +35,9 @@ func Parse(id string) (string, error) {
 			return "params type trans error,please check input"
 		}
 		if g%2 == 0 {
-			return "女"
+			return "Femal"
 		} else {
-			return "男"
+			return "Male"
 		}
 		// return id[len(id)-2 : len(id)-1]
 	}()
