@@ -2,48 +2,43 @@ package utils
 
 import (
 	"bufio"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
 	"path"
 	"strconv"
 	"strings"
+
 	// "os/exec"
 	// "path/filepath"
+	"chpid/settings"
 )
 
-var StcodeMap = map[string]string{}
+// func init() {
+// 	// 解除下三行注释 并引入 exec, filepath 处理go build 后读取json文件路径问题
+// 	// cmd_f, _ := exec.LookPath(os.Args[0])
+// 	// path, _ := filepath.Abs(cmd_f)
+// 	// i := strings.LastIndex(path, string(os.PathSeparator))
+// 	// f, err := ioutil.ReadFile(path[:i] + "/stcode01.json")
 
-func init() {
-	// 解除下三行注释 并引入 exec, filepath 处理go build 后读取json文件路径问题
-	// cmd_f, _ := exec.LookPath(os.Args[0])
-	// path, _ := filepath.Abs(cmd_f)
-	// i := strings.LastIndex(path, string(os.PathSeparator))
-	// f, err := ioutil.ReadFile(path[:i] + "/stcode01.json")
+// 	f, err := ioutil.ReadFile("G:/study_pro/go_project/chpid/stcode01.json") //go run main.go运行时使用相对路径 且应保证stcode文件存在于指定位置
+// 	// f, err := ioutil.ReadFile("./stcode01.json") //go run main.go运行时使用相对路径 且应保证stcode文件存在于指定位置
 
-	f, err := ioutil.ReadFile("D:/study/chpid/stcode01.json") //go run main.go运行时使用相对路径 且应保证stcode文件存在于指定位置
+// 	if err != nil {
+// 		fmt.Printf("区划代码文件读取失败！\n Loading stcode file fail! ")
+// 		os.Exit(1)
+// 	}
 
-	if err != nil {
-		fmt.Printf("区划代码文件读取失败！\n Loading stcode file fail! ")
-		os.Exit(1)
-	}
+// 	err = json.Unmarshal(f, &StcodeMap)
+// 	if err != nil {
+// 		fmt.Println(err)
+// 	}
 
-	err = json.Unmarshal(f, &StcodeMap)
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	// for key, value := range StcodeMap {
-	// 	fmt.Printf("%v--%v", key, value)
-	// }
-}
-
-// var stcodeMap = map[string]string{"612327": "ly","612328":"zb","612325":"mx","612326":"nq"}
-var Weight = []int{7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2}
-var CheckList = []string{"1", "0", "X", "9", "8", "7", "6", "5", "4", "3", "2", "1"}
+// 	// for key, value := range StcodeMap {
+// 	// 	fmt.Printf("%v--%v", key, value)
+// 	// }
+// }
 
 //id string length check
 func lenC(s string) error {
@@ -55,7 +50,7 @@ func lenC(s string) error {
 
 //stcode check
 func stcodeC(s []string) error {
-	if _, ok := StcodeMap[strings.Join(s[0:6], "")]; ok {
+	if _, ok := settings.StcodeMap[strings.Join(s[0:6], "")]; ok {
 		return nil
 	} else {
 		return errors.New("district code error or not exsit")
@@ -89,11 +84,11 @@ func CalCheckbit(s []string) string {
 	var sum int
 	for i, s := range s {
 		value, _ := strconv.Atoi(s)
-		isum := value * Weight[i]
+		isum := value * settings.Weight[i]
 		sum += isum
 	}
 	var icheck int = sum % 11
-	return CheckList[icheck]
+	return settings.CheckList[icheck]
 }
 
 //valid the check bit

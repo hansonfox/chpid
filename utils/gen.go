@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"chpid/settings"
 	"fmt"
 	// "log"
 
@@ -31,7 +32,7 @@ func Randstcode() string {
 	rand.Seed(time.Now().UnixNano())
 
 	var stcodeArray []string
-	for key := range StcodeMap {
+	for key := range settings.StcodeMap {
 		stcodeArray = append(stcodeArray, key)
 	}
 	rIndex := rand.Intn(len(stcodeArray))
@@ -39,7 +40,7 @@ func Randstcode() string {
 }
 
 func RandDate() string {
-	d := RandBirthday()
+	d, _ := RandBirthday_v2()
 	return fmt.Sprintf("%d%02d%02d", d.year, d.month, d.day)
 }
 

@@ -7,7 +7,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"chpid/func/utils"
+	"chpid/utils"
 )
 
 var parsedesc = strings.Join([]string{

@@ -6,7 +6,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"chpid/func/utils"
+	"chpid/utils"
 )
 
 var randdesc = strings.Join([]string{

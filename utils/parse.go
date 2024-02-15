@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"chpid/settings"
 	"fmt"
 	"strconv"
 	"time"
@@ -43,7 +44,7 @@ func Parse(id string) (string, error) {
 	}()
 	age := calAge(id[6:10] + "-" + id[10:12] + "-" + id[12:14])
 	info := &IDInfo{
-		stcode:    StcodeMap[id[:6]],
+		stcode:    settings.StcodeMap[id[:6]],
 		birth:     id[6:10] + "-" + id[10:12] + "-" + id[12:14],
 		age:       age,
 		gender:    gender,

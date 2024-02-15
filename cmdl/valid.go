@@ -4,7 +4,7 @@ import (
 	"log"
 	"strings"
 
-	"chpid/func/utils"
+	"chpid/utils"
 
 	"github.com/spf13/cobra"
 )

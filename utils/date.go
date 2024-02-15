@@ -3,6 +3,7 @@ package utils
 import (
 	"errors"
 	"math/rand"
+	"strconv"
 	"time"
 )
 
@@ -76,4 +77,29 @@ func RandBirthday() Date {
 		}
 	}
 	return d
+}
+
+func RandBirthday_v2() (Date, error) {
+	rand.Seed(time.Now().UnixNano())
+	d := Date{}
+	rand_timestamp := int64(0.0 + rand.Float64()*float64(time.Now().Unix()-0.0))
+	rand_date := time.Unix(rand_timestamp, 0)
+	format_date := rand_date.Format("20060102")
+
+	randYear, _ := strconv.Atoi(format_date[:4])
+	randMonth, _ := strconv.Atoi(format_date[4:6])
+	randDay, _ := strconv.Atoi(format_date[6:8])
+	error := d.SetYear(randYear)
+	if error != nil {
+		return d, error
+	}
+	error = d.SetMonth(randMonth)
+	if error != nil {
+		return d, error
+	}
+	error = d.SetDay(randDay)
+	if error != nil {
+		return d, error
+	}
+	return d, nil
 }
