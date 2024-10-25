@@ -93,6 +93,7 @@ func writeToFileCo(c chan string, done chan bool, fn string) {
 }
 
 func RandGenNCo(n int, fn string) {
+	fmt.Println("write res to file:%d",fn)
 	c := make(chan string, 100)
 	done := make(chan bool)
 	wg := sync.WaitGroup{}

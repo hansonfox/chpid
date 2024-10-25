@@ -30,5 +30,5 @@ var out string
 
 func init() {
 	randCmd.Flags().IntVarP(&num, "num", "r", 1, "请输入随机生成数量")
-	randCmd.Flags().StringVarP(&out, "out", "o", "res.txt", "输出至文件")
+	randCmd.Flags().StringVarP(&out, "out", "o", "default_res.txt", "输出至文件")
 }
